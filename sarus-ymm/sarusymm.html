@@ -1,0 +1,4053 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b1f21">
+
+  <title>Sarus Yeminli Mali Müşavirlik</title>
+
+  <meta
+    name="description"
+    content="Sarus Yeminli Mali Müşavirlik Denetim Limited Şirketi. Yeminli mali müşavirlik, vergi, denetim, tasdik, yatırım ve finansal danışmanlık."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Libre+Franklin:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <style>
+    :root {
+      --ink: #191c1e;
+      --ink-soft: #303538;
+      --ink-light: #51595d;
+      --muted: #6e767a;
+      --canvas: #eef0f0;
+      --canvas-dark: #252a2d;
+      --canvas-deep: #181c1e;
+      --paper: #ffffff;
+      --line: #d6dadd;
+      --line-dark: #474e52;
+      --signal: #5d7c89;
+      --signal-dark: #3f606d;
+      --success: #47715a;
+      --danger: #9e4949;
+      --container: 1220px;
+      --radius: 6px;
+      --shadow: 0 24px 58px rgba(15, 18, 20, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    body.locked {
+      overflow: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(93, 124, 137, 0.42);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 9999;
+      padding: 10px 14px;
+      color: white;
+      background: var(--canvas-deep);
+      transform: translateY(-160%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .page {
+      display: none;
+      min-height: 70vh;
+      animation: pageEnter 350ms ease both;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes pageEnter {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section {
+      padding: 90px 0;
+    }
+
+    .section-compact {
+      padding: 62px 0;
+    }
+
+    .section-white {
+      background: var(--paper);
+    }
+
+    .section-dark {
+      color: white;
+      background: var(--canvas-dark);
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      color: var(--signal-dark);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 34px;
+      height: 2px;
+      flex: 0 0 auto;
+      content: "";
+      background: currentColor;
+    }
+
+    .section-dark .eyebrow,
+    .page-head .eyebrow {
+      color: #a8bdc6;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 460px);
+      gap: 55px;
+      align-items: end;
+      margin-bottom: 44px;
+    }
+
+    .section-heading h2 {
+      max-width: 760px;
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 40px;
+      line-height: 1.18;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .section-dark .section-heading p {
+      color: #bcc3c6;
+    }
+
+    .btn {
+      position: relative;
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      overflow: hidden;
+      padding: 11px 18px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      font-weight: 700;
+      line-height: 1.2;
+      isolation: isolate;
+      transition:
+        background 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
+    }
+
+    .btn::after {
+      position: absolute;
+      top: -70%;
+      left: -35%;
+      z-index: -1;
+      width: 18%;
+      height: 240%;
+      content: "";
+      background: rgba(255, 255, 255, 0.22);
+      transform: skewX(-18deg) translateX(-500%);
+      transition: transform 650ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn:hover::after {
+      transform: skewX(-18deg) translateX(1000%);
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 auto;
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--signal-dark);
+      border-color: var(--signal-dark);
+    }
+
+    .btn-primary:hover {
+      background: #304f5b;
+      border-color: #304f5b;
+    }
+
+    .btn-dark {
+      color: white;
+      background: var(--canvas-deep);
+      border-color: var(--canvas-deep);
+    }
+
+    .btn-light {
+      color: var(--ink);
+      background: white;
+      border-color: white;
+    }
+
+    .btn-outline {
+      color: var(--ink);
+      background: transparent;
+      border-color: #aab0b3;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--ink);
+    }
+
+    .btn-glass {
+      color: white;
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.44);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    .btn-glass:hover {
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.7);
+    }
+
+    .icon-btn {
+      width: 43px;
+      height: 43px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+    }
+
+    .icon-btn:hover {
+      background: rgba(225, 228, 229, 0.8);
+    }
+
+    .icon-btn svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    /* Üst alan */
+
+    .topbar {
+      color: #dce1e3;
+      background: var(--canvas-deep);
+      font-size: 12px;
+    }
+
+    .topbar-inner {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+    }
+
+    .topbar-group {
+      display: flex;
+      align-items: center;
+      gap: 23px;
+    }
+
+    .topbar a {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .topbar a:hover {
+      color: white;
+    }
+
+    .topbar svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(245, 246, 246, 0.79);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.78);
+      box-shadow:
+        0 12px 35px rgba(17, 20, 22, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(22px) saturate(135%);
+      -webkit-backdrop-filter: blur(22px) saturate(135%);
+    }
+
+    .header-row {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .brand {
+      min-width: 225px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 61px;
+      height: 61px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex: 0 0 auto;
+      background: white;
+      border: 1px solid #ccd1d3;
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-logo-fallback {
+      display: none;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 18px;
+      line-height: 1.1;
+    }
+
+    .brand-copy small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .main-nav {
+      margin-left: auto;
+    }
+
+    .main-nav ul {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 13px 10px;
+      color: #4f565a;
+      border-bottom: 2px solid transparent;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--ink);
+      border-bottom-color: var(--signal);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    /* Hero */
+
+    .hero {
+      --hero-x: 50%;
+      --hero-y: 43%;
+      position: relative;
+      min-height: 560px;
+      height: calc(100vh - 150px);
+      max-height: 710px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      color: white;
+      background-image: url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=2200&q=88");
+      background-position: var(--hero-x) var(--hero-y);
+      background-size: cover;
+      transition: background-position 260ms ease;
+    }
+
+    .hero::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: rgba(15, 19, 21, 0.73);
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      width: min(calc(100% - 40px), var(--container));
+      margin-inline: auto;
+      padding: 75px 0 55px;
+    }
+
+    .hero-content {
+      max-width: 850px;
+    }
+
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 19px;
+      color: #d5dcdf;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .hero-kicker::before {
+      width: 45px;
+      height: 2px;
+      content: "";
+      background: #a8bdc6;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 72px;
+      line-height: 1.02;
+    }
+
+    .hero h1 span {
+      display: block;
+      margin-top: 12px;
+      color: #d9dfe2;
+      font-size: 31px;
+      font-weight: 500;
+    }
+
+    .hero-lead {
+      max-width: 720px;
+      margin: 24px 0 0;
+      color: #d0d6d9;
+      font-size: 18px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+      margin-top: 31px;
+    }
+
+    .hero-facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      max-width: 735px;
+      margin-top: 48px;
+      padding: 0 20px;
+      background: rgba(255, 255, 255, 0.065);
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      border-radius: var(--radius);
+      box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      backdrop-filter: blur(19px) saturate(130%);
+      -webkit-backdrop-filter: blur(19px) saturate(130%);
+    }
+
+    .hero-fact {
+      min-height: 85px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 13px 20px 13px 0;
+    }
+
+    .hero-fact + .hero-fact {
+      padding-left: 20px;
+      border-left: 1px solid rgba(255, 255, 255, 0.19);
+    }
+
+    .hero-fact strong {
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 20px;
+    }
+
+    .hero-fact span {
+      color: #bbc3c6;
+      font-size: 12px;
+    }
+
+    .hero-kicker,
+    .hero h1,
+    .hero-lead,
+    .hero-actions,
+    .hero-facts {
+      opacity: 0;
+      animation: heroReveal 720ms cubic-bezier(.2, .8, .2, 1) forwards;
+    }
+
+    .hero h1 {
+      animation-delay: 100ms;
+    }
+
+    .hero-lead {
+      animation-delay: 190ms;
+    }
+
+    .hero-actions {
+      animation-delay: 280ms;
+    }
+
+    .hero-facts {
+      animation-delay: 370ms;
+    }
+
+    @keyframes heroReveal {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .trust-strip {
+      color: #d7dcde;
+      background: rgba(31, 36, 39, 0.97);
+      border-bottom: 1px solid var(--line-dark);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .trust-grid {
+      min-height: 82px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 23px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .trust-item + .trust-item {
+      border-left: 1px solid var(--line-dark);
+    }
+
+    .trust-item svg {
+      width: 19px;
+      height: 19px;
+      color: #9fb4bd;
+    }
+
+    /* Hizmet kartları */
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .service-card {
+      position: relative;
+      min-height: 270px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      padding: 27px;
+      background: white;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition:
+        color 220ms ease,
+        background 220ms ease,
+        transform 220ms ease;
+    }
+
+    .service-card::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      content: "";
+      background: var(--signal);
+      transition: width 350ms ease;
+    }
+
+    .service-card:hover {
+      z-index: 2;
+      color: white;
+      background: var(--ink-soft);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .service-card:hover::before {
+      width: 100%;
+    }
+
+    .service-number {
+      margin-bottom: 33px;
+      color: var(--signal);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .service-card h3 {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 19px;
+      line-height: 1.3;
+    }
+
+    .service-card p {
+      margin: 12px 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .service-card:hover p {
+      color: #c9d0d3;
+    }
+
+    .service-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .service-link svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Tanıtım */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 76px;
+      align-items: center;
+    }
+
+    .about-image {
+      position: relative;
+      min-height: 500px;
+      overflow: hidden;
+      background: #d5d8d9;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: transform 900ms ease;
+    }
+
+    .about-image:hover img {
+      transform: scale(1.035);
+    }
+
+    .about-glass {
+      position: absolute;
+      right: 17px;
+      bottom: 17px;
+      width: 210px;
+      padding: 24px;
+      color: white;
+      background: rgba(24, 28, 30, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.17);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .about-glass strong {
+      display: block;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 28px;
+    }
+
+    .about-glass span {
+      color: #c2c9cc;
+      font-size: 12px;
+    }
+
+    .about-copy h2 {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 42px;
+      line-height: 1.16;
+    }
+
+    .about-copy > p {
+      margin: 23px 0;
+      color: var(--muted);
+    }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+      margin: 25px 0 31px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+    }
+
+    .check-list svg {
+      width: 18px;
+      height: 18px;
+      margin-top: 4px;
+      flex: 0 0 auto;
+      color: var(--success);
+    }
+
+    /* YMM kadrosu */
+
+    .team-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-section::before {
+      position: absolute;
+      inset: 20px;
+      pointer-events: none;
+      content: "";
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .team-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .person-card {
+      position: relative;
+      min-height: 510px;
+      overflow: hidden;
+      background: #343a3d;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      box-shadow:
+        0 28px 60px rgba(0, 0, 0, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      isolation: isolate;
+    }
+
+    .person-media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #343a3d;
+    }
+
+    .person-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(100%) contrast(1.04);
+      transition:
+        transform 900ms cubic-bezier(.2, .8, .2, 1),
+        filter 450ms ease;
+    }
+
+    .person-card:hover .person-media img {
+      transform: scale(1.055);
+      filter: grayscale(35%);
+    }
+
+    .person-initials {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: center;
+      color: rgba(255, 255, 255, 0.83);
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 74px;
+      font-weight: 700;
+    }
+
+    .person-media.no-photo .person-initials,
+    .person-media.has-error .person-initials {
+      display: grid;
+    }
+
+    .person-media.no-photo::before,
+    .person-media.no-photo::after {
+      position: absolute;
+      content: "";
+      border: 1px solid rgba(255, 255, 255, 0.11);
+    }
+
+    .person-media.no-photo::before {
+      inset: 11%;
+    }
+
+    .person-media.no-photo::after {
+      inset: 21%;
+    }
+
+    .person-glass {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      left: 14px;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: end;
+      padding: 20px;
+      color: white;
+      background: rgba(18, 22, 24, 0.68);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius);
+      box-shadow:
+        0 20px 46px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(21px) saturate(135%);
+      -webkit-backdrop-filter: blur(21px) saturate(135%);
+      transition:
+        background 230ms ease,
+        transform 230ms ease;
+    }
+
+    .person-card:hover .person-glass {
+      background: rgba(18, 22, 24, 0.82);
+      transform: translateY(-3px);
+    }
+
+    .person-glass h3 {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .person-glass p {
+      margin: 7px 0 0;
+      color: #c6cdd0;
+      font-size: 12px;
+    }
+
+    .person-glass small {
+      display: block;
+      margin-top: 10px;
+      color: #9fb7c1;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .profile-open {
+      width: 46px;
+      height: 46px;
+      display: inline-grid;
+      place-items: center;
+      padding: 0;
+      color: white;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      border-radius: 4px;
+    }
+
+    .profile-open:hover {
+      background: var(--signal-dark);
+    }
+
+    .profile-open svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    /* Süreç */
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line-dark);
+    }
+
+    .process-item {
+      min-height: 235px;
+      padding: 28px 28px 28px 0;
+    }
+
+    .process-item + .process-item {
+      padding-left: 28px;
+      border-left: 1px solid var(--line-dark);
+    }
+
+    .process-number {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 31px;
+      color: var(--canvas-deep);
+      background: #b8c5ca;
+      font-weight: 700;
+    }
+
+    .process-item h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .process-item p {
+      margin: 0;
+      color: #b9c0c3;
+      font-size: 13px;
+    }
+
+    /* Sayfa üstleri */
+
+    .page-head {
+      padding: 74px 0 61px;
+      color: white;
+      background: var(--canvas-dark);
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .page-head-grid {
+      display: grid;
+      grid-template-columns: 1fr minmax(300px, 430px);
+      gap: 55px;
+      align-items: end;
+    }
+
+    .page-head h1 {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 51px;
+      line-height: 1.12;
+    }
+
+    .page-head p {
+      margin: 0;
+      color: #c0c6c9;
+    }
+
+    /* Kurumsal */
+
+    .company-grid {
+      display: grid;
+      grid-template-columns: 1fr minmax(390px, 0.8fr);
+      gap: 70px;
+      align-items: start;
+    }
+
+    .company-copy h2 {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 40px;
+      line-height: 1.2;
+    }
+
+    .company-copy p {
+      color: var(--muted);
+    }
+
+    .company-table {
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .company-row {
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 20px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .company-row:last-child {
+      border-bottom: 0;
+    }
+
+    .company-row span {
+      color: var(--muted);
+    }
+
+    .company-row strong {
+      overflow-wrap: anywhere;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .value-item {
+      min-height: 230px;
+      padding: 27px;
+      background: white;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .value-item svg {
+      width: 25px;
+      height: 25px;
+      color: var(--signal-dark);
+    }
+
+    .value-item h3 {
+      margin: 34px 0 10px;
+      font-size: 17px;
+    }
+
+    .value-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Hizmet sayfası */
+
+    .services-shell {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 34px;
+      align-items: start;
+    }
+
+    .service-tabs {
+      display: grid;
+      border-top: 1px solid var(--line);
+    }
+
+    .service-tab {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 13px 15px;
+      color: var(--ink-soft);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .service-tab svg {
+      width: 16px;
+      height: 16px;
+      opacity: 0;
+    }
+
+    .service-tab:hover,
+    .service-tab.active {
+      color: white;
+      background: var(--canvas-dark);
+    }
+
+    .service-tab.active svg {
+      opacity: 1;
+    }
+
+    .service-detail {
+      min-height: 580px;
+      padding: 42px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.84);
+      border-radius: var(--radius);
+      box-shadow:
+        0 25px 55px rgba(18, 22, 24, 0.09),
+        inset 0 1px 0 white;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .service-detail-icon {
+      width: 51px;
+      height: 51px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 28px;
+      color: white;
+      background: var(--signal-dark);
+    }
+
+    .service-detail-icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .service-detail h2 {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 35px;
+      line-height: 1.2;
+    }
+
+    .service-summary {
+      margin: 18px 0 30px;
+      color: var(--muted);
+    }
+
+    .service-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 42px;
+      margin: 31px 0;
+      padding: 29px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .service-columns h3 {
+      margin: 0 0 15px;
+      font-size: 14px;
+    }
+
+    .detail-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .detail-list li {
+      display: flex;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .detail-list li::before {
+      width: 5px;
+      height: 5px;
+      margin-top: 8px;
+      flex: 0 0 auto;
+      content: "";
+      background: var(--signal);
+    }
+
+    .faq-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .faq-question {
+      width: 100%;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .faq-question svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 180ms ease;
+    }
+
+    .faq-question[aria-expanded="true"] svg {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      display: none;
+      max-width: 880px;
+      padding: 0 0 23px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .faq-answer.open {
+      display: block;
+    }
+
+    /* Ofisler */
+
+    .office-layout {
+      display: grid;
+      grid-template-columns: 315px minmax(0, 1fr);
+      gap: 30px;
+    }
+
+    .office-tabs {
+      display: grid;
+      gap: 8px;
+    }
+
+    .office-tab {
+      min-height: 83px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.86);
+      border-radius: var(--radius);
+      text-align: left;
+      box-shadow: inset 0 1px 0 white;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    .office-tab span,
+    .office-tab small {
+      display: block;
+    }
+
+    .office-tab small {
+      color: var(--muted);
+    }
+
+    .office-tab svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .office-tab.active {
+      color: white;
+      background: var(--canvas-dark);
+      border-color: var(--canvas-dark);
+    }
+
+    .office-tab.active small {
+      color: #c6ccce;
+    }
+
+    .office-panel {
+      background: white;
+      border: 1px solid var(--line);
+    }
+
+    .office-map {
+      width: 100%;
+      height: 390px;
+      display: block;
+      background: #d4d7d8;
+      border: 0;
+      filter: grayscale(100%);
+    }
+
+    .office-info {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 30px;
+      align-items: end;
+      padding: 30px;
+    }
+
+    .office-info h2 {
+      margin: 0;
+      font-size: 27px;
+    }
+
+    .office-info p {
+      max-width: 650px;
+      margin: 9px 0 0;
+      color: var(--muted);
+    }
+
+    .office-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    /* İletişim */
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .contact-panel {
+      color: white;
+      background: var(--canvas-dark);
+    }
+
+    .contact-head {
+      padding: 32px;
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .contact-head h2 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .contact-head p {
+      margin: 9px 0 0;
+      color: #bac1c4;
+    }
+
+    .contact-method {
+      width: 100%;
+      display: flex;
+      gap: 15px;
+      padding: 22px 32px;
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line-dark);
+      text-align: left;
+    }
+
+    .contact-method:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .contact-method svg {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 auto;
+      color: #9fb4bd;
+    }
+
+    .contact-method small {
+      display: block;
+      margin-bottom: 4px;
+      color: #abb3b6;
+    }
+
+    .contact-method strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .contact-form {
+      padding: 35px;
+      background: rgba(255, 255, 255, 0.81);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: var(--radius);
+      box-shadow:
+        0 25px 60px rgba(17, 21, 23, 0.1),
+        inset 0 1px 0 white;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .contact-form h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+    }
+
+    .contact-form > p {
+      margin: 0 0 27px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .form-field.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .input {
+      width: 100%;
+      min-height: 48px;
+      padding: 11px 13px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid #bcc2c5;
+      border-radius: 4px;
+    }
+
+    .input:focus {
+      border-color: var(--signal-dark);
+      outline: 3px solid rgba(93, 124, 137, 0.14);
+    }
+
+    textarea.input {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-note {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .consent {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .consent input {
+      width: 17px;
+      height: 17px;
+      margin-top: 3px;
+      accent-color: var(--signal-dark);
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 9px;
+      margin-top: 23px;
+    }
+
+    /* CTA */
+
+    .cta {
+      color: white;
+      background: var(--signal-dark);
+    }
+
+    .cta-inner {
+      min-height: 225px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .cta h2 {
+      max-width: 780px;
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 38px;
+      line-height: 1.2;
+    }
+
+    .cta p {
+      margin: 13px 0 0;
+      color: #d4dfe2;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 9px;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      color: #d5dadc;
+      background: var(--canvas-deep);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.7fr 0.7fr 1fr;
+      gap: 48px;
+      padding: 65px 0 50px;
+    }
+
+    .footer-logo {
+      width: 88px;
+      height: 88px;
+      margin-bottom: 19px;
+      object-fit: contain;
+      background: white;
+    }
+
+    .footer-about p {
+      max-width: 350px;
+      margin: 0;
+      color: #abb3b6;
+      font-size: 13px;
+    }
+
+    .footer-column h2 {
+      margin: 0 0 17px;
+      color: white;
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      color: #abb3b6;
+      list-style: none;
+      font-size: 12px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-contact {
+      display: grid;
+      gap: 14px;
+      color: #abb3b6;
+      font-size: 12px;
+    }
+
+    .footer-contact a {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .footer-contact svg {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      color: #91aab4;
+    }
+
+    .footer-bottom {
+      min-height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      color: #8f989c;
+      border-top: 1px solid #373d40;
+      font-size: 11px;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    /* Pencereler */
+
+    .profile-dialog {
+      width: min(790px, calc(100% - 28px));
+      padding: 0;
+      overflow: hidden;
+      color: white;
+      background: rgba(27, 31, 34, 0.91);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 7px;
+      box-shadow:
+        0 40px 90px rgba(0, 0, 0, 0.46),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(28px) saturate(140%);
+      -webkit-backdrop-filter: blur(28px) saturate(140%);
+    }
+
+    .profile-dialog::backdrop {
+      background: rgba(10, 12, 13, 0.78);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .dialog-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 5;
+      color: white;
+      background: rgba(0, 0, 0, 0.36);
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .dialog-close:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .profile-dialog-body {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      min-height: 430px;
+    }
+
+    .dialog-person-image {
+      min-height: 430px;
+      overflow: hidden;
+      background: #353b3e;
+    }
+
+    .dialog-person-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: grayscale(70%);
+    }
+
+    .dialog-monogram {
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, 0.84);
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 82px;
+      font-weight: 700;
+    }
+
+    .dialog-person-content {
+      align-self: center;
+      padding: 54px 42px 42px;
+    }
+
+    .dialog-person-content h2 {
+      margin: 0;
+      font-family: "Libre Franklin", Arial, sans-serif;
+      font-size: 31px;
+      line-height: 1.2;
+    }
+
+    .dialog-role {
+      margin: 8px 0 22px;
+      color: #a8bdc6;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .dialog-summary {
+      margin: 0 0 27px;
+      color: #c4cbce;
+      font-size: 14px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 20px;
+      bottom: 76px;
+      z-index: 3000;
+      max-width: 340px;
+      padding: 13px 16px;
+      color: white;
+      background: var(--canvas-deep);
+      border-left: 4px solid var(--signal);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: 180ms ease;
+      font-size: 13px;
+    }
+
+    .toast.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-top {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 900;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: 180ms ease;
+    }
+
+    .back-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Scroll animasyonu */
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 700ms cubic-bezier(.2, .8, .2, 1),
+        transform 700ms cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .js .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Tablet */
+
+    @media (max-width: 1080px) {
+      .brand {
+        min-width: 190px;
+      }
+
+      .brand-copy strong {
+        font-size: 16px;
+      }
+
+      .nav-link {
+        padding-inline: 7px;
+        font-size: 12px;
+      }
+
+      .header-appointment {
+        display: none;
+      }
+
+      .services-grid,
+      .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Mobil menü */
+
+    @media (max-width: 900px) {
+      .topbar {
+        display: none;
+      }
+
+      .container {
+        width: min(calc(100% - 28px), var(--container));
+      }
+
+      .header-row {
+        min-height: 72px;
+      }
+
+      .brand-logo {
+        width: 52px;
+        height: 52px;
+      }
+
+      .brand-copy small {
+        display: none;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        z-index: 2000;
+        display: block;
+        margin: 0;
+        padding: 20px 14px;
+        background: rgba(24, 28, 30, 0.97);
+        height: calc(100vh - 72px);
+        height: calc(100svh - 72px);
+        overflow-y: auto;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-8px);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        transition:
+          opacity 180ms ease,
+          visibility 180ms ease,
+          transform 180ms ease;
+      }
+
+      .main-nav.open {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .main-nav ul {
+        display: grid;
+      }
+
+      .nav-link {
+        padding: 16px;
+        color: #dce1e3;
+        border-bottom: 1px solid #3e4548;
+        font-size: 15px;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: white;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .menu-toggle {
+        position: relative;
+        z-index: 2100;
+        display: inline-grid;
+      }
+
+      .hero {
+        min-height: 590px;
+        height: calc(100svh - 110px);
+        max-height: 720px;
+      }
+
+      .hero-inner {
+        width: calc(100% - 28px);
+      }
+
+      .hero h1 {
+        font-size: 55px;
+      }
+
+      .hero h1 span {
+        font-size: 25px;
+      }
+
+      .hero-lead {
+        font-size: 16px;
+      }
+
+      .section-heading,
+      .page-head-grid {
+        grid-template-columns: 1fr;
+        gap: 19px;
+      }
+
+      .about-grid,
+      .company-grid,
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .person-card {
+        min-height: 575px;
+      }
+
+      .process-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-item:nth-child(3) {
+        border-left: 0;
+      }
+
+      .services-shell,
+      .office-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .service-tabs,
+      .office-tabs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .service-tab {
+        border: 1px solid var(--line);
+      }
+
+      .office-info {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-inner {
+        grid-template-columns: 1fr;
+        padding: 44px 0;
+      }
+    }
+
+    /* Telefon */
+
+    @media (max-width: 640px) {
+      .section {
+        padding: 65px 0;
+      }
+
+      .section-compact {
+        padding: 48px 0;
+      }
+
+      .brand {
+        min-width: 0;
+        margin-right: auto;
+      }
+
+      .brand-copy strong {
+        font-size: 15px;
+      }
+
+      .hero {
+        min-height: 650px;
+        height: auto;
+        background-position: 62% center;
+      }
+
+      .hero-inner {
+        padding: 78px 0 45px;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .hero h1 span {
+        font-size: 20px;
+      }
+
+      .hero-actions,
+      .cta-actions,
+      .form-actions {
+        display: grid;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .hero-facts {
+        grid-template-columns: 1fr;
+        margin-top: 35px;
+        padding: 10px 18px;
+      }
+
+      .hero-fact {
+        min-height: 63px;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.17);
+      }
+
+      .hero-fact + .hero-fact {
+        padding-left: 0;
+        border-left: 0;
+      }
+
+      .trust-grid,
+      .services-grid,
+      .values-grid,
+      .process-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-item + .trust-item,
+      .process-item + .process-item {
+        padding-left: 23px;
+        border-top: 1px solid var(--line-dark);
+        border-left: 0;
+      }
+
+      .about-image,
+      .about-image img {
+        min-height: 370px;
+        height: 370px;
+      }
+
+      .about-copy h2,
+      .company-copy h2,
+      .section-heading h2 {
+        font-size: 33px;
+      }
+
+      .page-head {
+        padding: 53px 0 44px;
+      }
+
+      .page-head h1 {
+        font-size: 37px;
+      }
+
+      .person-card {
+        min-height: 490px;
+      }
+
+      .person-glass {
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
+        padding: 17px;
+      }
+
+      .person-glass h3 {
+        font-size: 18px;
+      }
+
+      .company-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .service-tabs,
+      .office-tabs,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-detail {
+        min-height: auto;
+        padding: 25px 20px;
+      }
+
+      .service-detail h2 {
+        font-size: 28px;
+      }
+
+      .service-columns {
+        grid-template-columns: 1fr;
+        gap: 26px;
+      }
+
+      .office-map {
+        height: 310px;
+      }
+
+      .contact-form {
+        padding: 25px 18px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 20px 0;
+      }
+
+      .profile-dialog {
+        max-height: 88vh;
+        overflow-y: auto;
+      }
+
+      .profile-dialog-body {
+        grid-template-columns: 1fr;
+      }
+
+      .dialog-person-image,
+      .dialog-monogram {
+        min-height: 310px;
+        max-height: 340px;
+      }
+
+      .dialog-person-content {
+        padding: 29px 21px;
+      }
+
+      .dialog-person-content h2 {
+        padding-right: 38px;
+        font-size: 25px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .hero-kicker,
+      .hero h1,
+      .hero-lead,
+      .hero-actions,
+      .hero-facts,
+      .js .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    document.documentElement.classList.add("js");
+  </script>
+
+  <a class="skip-link" href="#mainContent">İçeriğe geç</a>
+
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <div class="topbar-group">
+        <a href="tel:+903225027855">
+          <i data-lucide="phone"></i>
+          0322 502 78 55
+        </a>
+
+        <a href="tel:+908505572787">
+          <i data-lucide="headphones"></i>
+          0850 557 27 87
+        </a>
+
+        <a href="mailto:sarusymm01@gmail.com">
+          <i data-lucide="mail"></i>
+          sarusymm01@gmail.com
+        </a>
+      </div>
+
+      <div class="topbar-group">
+        <span>Adana · Bursa · İstanbul</span>
+
+        <a
+          href="https://www.linkedin.com/company/sarusymm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i data-lucide="linkedin"></i>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="#/anasayfa" aria-label="Sarus ana sayfa">
+        <span class="brand-logo">
+          <img
+            class="official-logo"
+            src="https://media.licdn.com/dms/image/v2/C4E0BAQFsD0lTPt1_5g/company-logo_200_200/company-logo_200_200/0/1630613740343/sarus_yeminli_mali_musavirlik_denetim_ltd_sti_logo?e=2147483647&amp;v=beta&amp;t=5Ad3sKDLPBfa41dZU0RafwgEEV7e2SPxLCU6AwvR6Hw"
+            alt="Sarus Yeminli Mali Müşavirlik logosu"
+            referrerpolicy="no-referrer"
+          >
+          <span class="brand-logo-fallback">sarus</span>
+        </span>
+
+        <span class="brand-copy">
+          <strong>SARUS</strong>
+          <small>YEMİNLİ MALİ MÜŞAVİRLİK</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Ana menü">
+        <ul>
+          <li><a class="nav-link" href="#/anasayfa">Ana Sayfa</a></li>
+          <li><a class="nav-link" href="#/kurumsal">Kurumsal</a></li>
+          <li><a class="nav-link" href="#/hizmetler">Hizmetler</a></li>
+          <li><a class="nav-link" href="#/kadromuz">YMM Kadromuz</a></li>
+          <li><a class="nav-link" href="#/ofisler">Ofisler</a></li>
+          <li><a class="nav-link" href="#/iletisim">İletişim</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn-dark header-appointment" href="#/iletisim">
+          <i data-lucide="calendar-days"></i>
+          Görüşme Talebi
+        </a>
+
+        <button
+          class="icon-btn menu-toggle"
+          id="menuToggle"
+          type="button"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Menüyü aç"
+          title="Menü"
+        >
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="mainContent">
+    <!-- ANA SAYFA -->
+
+    <article class="page" data-page="anasayfa">
+      <section class="hero" id="hero">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <div class="hero-kicker">2020'den beri profesyonel mali danışmanlık</div>
+
+            <h1>
+              SARUS
+              <span>Yeminli Mali Müşavirlik</span>
+            </h1>
+
+            <p class="hero-lead">
+              Vergi, tasdik, denetim, yatırım ve finansal danışmanlık süreçlerini
+              mevzuat disiplini, kurumsal sorumluluk ve ölçülebilir iş planlarıyla yönetiyoruz.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-light" href="#/hizmetler">
+                Hizmetleri İnceleyin
+                <i data-lucide="arrow-right"></i>
+              </a>
+
+              <a class="btn btn-glass" href="#/iletisim">
+                <i data-lucide="calendar-check"></i>
+                Uzman Görüşmesi
+              </a>
+
+              <a class="btn btn-glass" href="tel:+903225027855">
+                <i data-lucide="phone-call"></i>
+                Bizi Arayın
+              </a>
+            </div>
+
+            <div class="hero-facts">
+              <div class="hero-fact">
+                <strong>2020</strong>
+                <span>Kuruluş yılı</span>
+              </div>
+
+              <div class="hero-fact">
+                <strong>3 şehir</strong>
+                <span>Adana, Bursa ve İstanbul</span>
+              </div>
+
+              <div class="hero-fact">
+                <strong>69.20.04</strong>
+                <span>YMM faaliyet kodu</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-strip">
+        <div class="container trust-grid">
+          <div class="trust-item">
+            <i data-lucide="badge-check"></i>
+            Yeminli Mali Müşavirlik
+          </div>
+
+          <div class="trust-item">
+            <i data-lucide="file-check-2"></i>
+            Tasdik ve Denetim
+          </div>
+
+          <div class="trust-item">
+            <i data-lucide="scale"></i>
+            Vergi Danışmanlığı
+          </div>
+
+          <div class="trust-item">
+            <i data-lucide="chart-no-axes-combined"></i>
+            Yatırım ve Finans
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-white reveal">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Uzmanlık alanları</p>
+              <h2>Finansal kararlarınız için bütüncül danışmanlık</h2>
+            </div>
+
+            <p>
+              Yasal yükümlülüklerden stratejik büyüme kararlarına kadar her süreci
+              doğru bilgi, düzenli raporlama ve kontrollü uygulama yaklaşımıyla ele alıyoruz.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <a class="service-card" href="#/hizmetler/tam-tasdik">
+              <span class="service-number">01</span>
+              <h3>Tam Tasdik</h3>
+              <p>Vergi beyannameleri ve mali tabloların dönemsel denetim ve tasdik süreci.</p>
+              <span class="service-link">
+                Ayrıntıları incele
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+
+            <a class="service-card" href="#/hizmetler/kdv-iade">
+              <span class="service-number">02</span>
+              <h3>KDV İade Tasdiki</h3>
+              <p>İade dosyalarının hazırlanması, kontrolü, raporlanması ve süreç takibi.</p>
+              <span class="service-link">
+                Ayrıntıları incele
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+
+            <a class="service-card" href="#/hizmetler/vergi-danismanligi">
+              <span class="service-number">03</span>
+              <h3>Vergi Danışmanlığı</h3>
+              <p>Vergisel risklerin belirlenmesi ve mevzuata uygun çözüm tasarımı.</p>
+              <span class="service-link">
+                Ayrıntıları incele
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+
+            <a class="service-card" href="#/hizmetler/yatirim-tesvik">
+              <span class="service-number">04</span>
+              <h3>Yatırım ve Teşvik</h3>
+              <p>Yatırımların teşvik, finansman ve mali fizibilite açısından incelenmesi.</p>
+              <span class="service-link">
+                Ayrıntıları incele
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+
+            <a class="service-card" href="#/hizmetler/transfer-fiyatlandirma">
+              <span class="service-number">05</span>
+              <h3>Transfer Fiyatlandırması</h3>
+              <p>İlişkili taraf işlemlerinde analiz, emsal araştırması ve raporlama.</p>
+              <span class="service-link">
+                Ayrıntıları incele
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+
+            <a class="service-card" href="#/hizmetler/vergi-inceleme">
+              <span class="service-number">06</span>
+              <h3>İnceleme ve Uzlaşma</h3>
+              <p>Vergi inceleme ve uzlaşma süreçlerinde teknik değerlendirme desteği.</p>
+              <span class="service-link">
+                Ayrıntıları incele
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+
+            <a class="service-card" href="#/hizmetler/kurumsal-finans">
+              <span class="service-number">07</span>
+              <h3>Kurumsal Finans</h3>
+              <p>Nakit akışı, bütçeleme, performans ölçümü ve yönetim raporlaması.</p>
+              <span class="service-link">
+                Ayrıntıları incele
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+
+            <a class="service-card" href="#/hizmetler/sirket-yapilandirma">
+              <span class="service-number">08</span>
+              <h3>Şirket Yapılandırma</h3>
+              <p>Birleşme, bölünme, tür değişikliği ve sermaye işlemleri danışmanlığı.</p>
+              <span class="service-link">
+                Ayrıntıları incele
+                <i data-lucide="arrow-up-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="container about-grid">
+          <div class="about-image">
+            <img
+              src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=85"
+              alt="Kurumsal danışmanlık toplantısı"
+              loading="lazy"
+            >
+
+            <div class="about-glass">
+              <strong>SARUS</strong>
+              <span>Bilgi, disiplin ve sorumluluk</span>
+            </div>
+          </div>
+
+          <div class="about-copy">
+            <p class="eyebrow">Kurumsal yaklaşım</p>
+            <h2>Mevzuatı izleyen değil, süreci yöneten danışmanlık</h2>
+
+            <p>
+              Sarus Yeminli Mali Müşavirlik Denetim Limited Şirketi;
+              yeminli mali müşavirlik, yatırım ve finansal danışmanlık
+              alanlarında hizmet vermek amacıyla 2020 yılında Adana'da kurulmuştur.
+            </p>
+
+            <ul class="check-list">
+              <li>
+                <i data-lucide="circle-check"></i>
+                <span>Planlı dönemsel denetim ve düzenli yönetim raporlaması</span>
+              </li>
+
+              <li>
+                <i data-lucide="circle-check"></i>
+                <span>Vergisel risklerin işlem öncesinde değerlendirilmesi</span>
+              </li>
+
+              <li>
+                <i data-lucide="circle-check"></i>
+                <span>Mevzuat değişikliklerinin kuruma özel analiz edilmesi</span>
+              </li>
+
+              <li>
+                <i data-lucide="circle-check"></i>
+                <span>Gizlilik ve mesleki etik ilkelerine bağlı çalışma</span>
+              </li>
+            </ul>
+
+            <a class="btn btn-dark" href="#/kurumsal">
+              Kurumsal Yapımız
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-dark team-section reveal">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Yeminli mali müşavirler</p>
+              <h2>Vergi denetimi geçmişiyle güçlenen uzman kadro</h2>
+            </div>
+
+            <p>
+              Kamu ve özel sektör deneyimini denetim, tasdik ve vergi mevzuatı
+              uzmanlığıyla bir araya getiriyoruz.
+            </p>
+          </div>
+
+          <div class="team-grid" data-team-grid></div>
+        </div>
+      </section>
+
+      <section class="section section-dark reveal">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Çalışma modeli</p>
+              <h2>Her aşaması takip edilebilir hizmet süreci</h2>
+            </div>
+
+            <p>
+              Hizmet kapsamı, sorumluluklar, teslimler ve iletişim düzeni
+              başlangıçta belirlenir ve süreç boyunca kayıt altına alınır.
+            </p>
+          </div>
+
+          <div class="process-grid">
+            <div class="process-item">
+              <span class="process-number">01</span>
+              <h3>İhtiyaç Analizi</h3>
+              <p>Şirket yapısı, sektör, işlem hacmi ve öncelikli riskler incelenir.</p>
+            </div>
+
+            <div class="process-item">
+              <span class="process-number">02</span>
+              <h3>Kapsam Planı</h3>
+              <p>Takvim, bilgi talepleri, sorumlular ve raporlama düzeni belirlenir.</p>
+            </div>
+
+            <div class="process-item">
+              <span class="process-number">03</span>
+              <h3>Analiz ve Kontrol</h3>
+              <p>Kayıtlar ve işlemler ilgili mevzuat çerçevesinde incelenir.</p>
+            </div>
+
+            <div class="process-item">
+              <span class="process-number">04</span>
+              <h3>Raporlama</h3>
+              <p>Tespitler, öneriler ve aksiyon planı yönetime sunulur.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta reveal">
+        <div class="container cta-inner">
+          <div>
+            <h2>Vergisel ve finansal süreçlerinizi birlikte değerlendirelim.</h2>
+            <p>İhtiyacınızı iletin, ilgili uzmanlık alanı için görüşme planlayalım.</p>
+          </div>
+
+          <div class="cta-actions">
+            <a class="btn btn-light" href="#/iletisim">
+              Görüşme Talebi
+              <i data-lucide="arrow-right"></i>
+            </a>
+
+            <a class="btn btn-glass" href="tel:+908505572787">
+              <i data-lucide="phone"></i>
+              0850 557 27 87
+            </a>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <!-- KURUMSAL -->
+
+    <article class="page" data-page="kurumsal">
+      <header class="page-head">
+        <div class="container page-head-grid">
+          <div>
+            <p class="eyebrow">Kurumsal</p>
+            <h1>Güven veren mali danışmanlık altyapısı</h1>
+          </div>
+
+          <p>
+            Mevzuat bilgisi, analitik yaklaşım ve mesleki sorumluluğu
+            aynı çalışma standardında bir araya getiriyoruz.
+          </p>
+        </div>
+      </header>
+
+      <section class="section section-white reveal">
+        <div class="container company-grid">
+          <div class="company-copy">
+            <p class="eyebrow">Sarus hakkında</p>
+            <h2>Yeminli mali müşavirlik, yatırım ve finansal danışmanlık</h2>
+
+            <p>
+              Sarus Yeminli Mali Müşavirlik Denetim Limited Şirketi,
+              28 Temmuz 2020 tarihinde Adana'da kurulmuştur.
+            </p>
+
+            <p>
+              Adana genel merkezinin yanında Bursa ve İstanbul yapılanmasıyla
+              farklı bölgelerdeki işletmelere danışmanlık hizmeti sunmaktadır.
+            </p>
+
+            <button class="btn btn-outline" type="button" data-print>
+              <i data-lucide="printer"></i>
+              Sayfayı Yazdır
+            </button>
+          </div>
+
+          <div class="company-table">
+            <div class="company-row">
+              <span>Ticari unvan</span>
+              <strong>Sarus Yeminli Mali Müşavirlik Denetim Limited Şirketi</strong>
+            </div>
+
+            <div class="company-row">
+              <span>Kuruluş</span>
+              <strong>28 Temmuz 2020</strong>
+            </div>
+
+            <div class="company-row">
+              <span>Şirket türü</span>
+              <strong>Limited Şirket</strong>
+            </div>
+
+            <div class="company-row">
+              <span>Genel merkez</span>
+              <strong>Seyhan / Adana</strong>
+            </div>
+
+            <div class="company-row">
+              <span>Ticaret odası</span>
+              <strong>Adana Ticaret Odası</strong>
+            </div>
+
+            <div class="company-row">
+              <span>Sicil numarası</span>
+              <strong>83235</strong>
+            </div>
+
+            <div class="company-row">
+              <span>NACE kodu</span>
+              <strong>69.20.04</strong>
+            </div>
+
+            <div class="company-row">
+              <span>Faaliyet alanı</span>
+              <strong>Yeminli mali müşavirlik faaliyetleri</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Çalışma ilkeleri</p>
+              <h2>Her müşteri ilişkisinde koruduğumuz değerler</h2>
+            </div>
+
+            <p>
+              Teknik uzmanlığın yanında bağımsızlık, gizlilik ve açık iletişim
+              ilkelerini hizmet kalitesinin ayrılmaz parçası kabul ediyoruz.
+            </p>
+          </div>
+
+          <div class="values-grid">
+            <div class="value-item">
+              <i data-lucide="shield"></i>
+              <h3>Gizlilik</h3>
+              <p>Mali ve ticari bilgiler yalnızca yetkili kişilerle paylaşılır.</p>
+            </div>
+
+            <div class="value-item">
+              <i data-lucide="scale"></i>
+              <h3>Bağımsızlık</h3>
+              <p>Değerlendirmeler mevzuat ve doğrulanabilir verilerle yapılır.</p>
+            </div>
+
+            <div class="value-item">
+              <i data-lucide="scan-search"></i>
+              <h3>Analitik Yaklaşım</h3>
+              <p>İşlemler mali etkileri ve potansiyel riskleriyle incelenir.</p>
+            </div>
+
+            <div class="value-item">
+              <i data-lucide="messages-square"></i>
+              <h3>Açık İletişim</h3>
+              <p>Tespitler anlaşılır ve uygulanabilir biçimde raporlanır.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <!-- HİZMETLER -->
+
+    <article class="page" data-page="hizmetler">
+      <header class="page-head">
+        <div class="container page-head-grid">
+          <div>
+            <p class="eyebrow">Hizmetler</p>
+            <h1>İhtiyaca göre şekillenen uzmanlık alanları</h1>
+          </div>
+
+          <p>
+            Hizmet başlığını seçerek çalışma kapsamını ve temel teslimleri inceleyebilirsiniz.
+          </p>
+        </div>
+      </header>
+
+      <section class="section reveal">
+        <div class="container services-shell">
+          <div class="service-tabs" id="serviceTabs"></div>
+
+          <section class="service-detail" aria-live="polite">
+            <div class="service-detail-icon">
+              <i id="serviceIcon" data-lucide="file-check-2"></i>
+            </div>
+
+            <p class="eyebrow">Uzmanlık hizmeti</p>
+            <h2 id="serviceTitle"></h2>
+            <p class="service-summary" id="serviceSummary"></p>
+
+            <div class="service-columns">
+              <div>
+                <h3>Çalışma kapsamı</h3>
+                <ul class="detail-list" id="serviceScope"></ul>
+              </div>
+
+              <div>
+                <h3>Temel teslimler</h3>
+                <ul class="detail-list" id="serviceOutputs"></ul>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" id="serviceConsult" type="button">
+              <i data-lucide="calendar-check"></i>
+              Bu Hizmet İçin Görüşme Talep Et
+            </button>
+          </section>
+        </div>
+      </section>
+
+      <section class="section section-white reveal">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Sık sorulanlar</p>
+              <h2>Hizmet süreci hakkında</h2>
+            </div>
+          </div>
+
+          <div class="faq-list">
+            <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                Hizmet kapsamı nasıl belirlenir?
+                <i data-lucide="plus"></i>
+              </button>
+              <div class="faq-answer">
+                İşletmenin sektörü, işlem hacmi, şirket yapısı ve öncelikli
+                ihtiyaçları değerlendirilerek kapsam ve çalışma takvimi belirlenir.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                Hangi belgelerin paylaşılması gerekir?
+                <i data-lucide="plus"></i>
+              </button>
+              <div class="faq-answer">
+                Mali tablolar, beyannameler, yasal defter kayıtları ve işlem
+                dayanakları hizmete özel bilgi talep listesinde belirtilir.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                Çalışmalar uzaktan yürütülebilir mi?
+                <i data-lucide="plus"></i>
+              </button>
+              <div class="faq-answer">
+                Belge paylaşımı ve toplantıların önemli bölümü dijital ortamda
+                yürütülebilir. Yerinde inceleme ihtiyacı ayrıca planlanır.
+              </div>
+            </div>
+
+            <div class="faq-item">
+              <button class="faq-question" type="button" aria-expanded="false">
+                Ücretlendirme nasıl belirlenir?
+                <i data-lucide="plus"></i>
+              </button>
+              <div class="faq-answer">
+                İş hacmi, işlem çeşitliliği, çalışma süresi ve mesleki sorumluluk
+                dikkate alınarak ilgili ücret tarifesi çerçevesinde belirlenir.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <!-- KADROMUZ -->
+
+    <article class="page" data-page="kadromuz">
+      <header class="page-head">
+        <div class="container page-head-grid">
+          <div>
+            <p class="eyebrow">YMM kadromuz</p>
+            <h1>Denetim deneyimi, teknik uzmanlık ve sorumluluk</h1>
+          </div>
+
+          <p>
+            Profil kartlarındaki düğmeleri kullanarak mesleki geçmiş bilgilerini inceleyebilirsiniz.
+          </p>
+        </div>
+      </header>
+
+      <section class="section section-dark team-section reveal">
+        <div class="container">
+          <div class="team-grid" data-team-grid></div>
+        </div>
+      </section>
+
+      <section class="section section-white reveal">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Ortak yetkinlikler</p>
+              <h2>Farklı sektörlere uyarlanan denetim yaklaşımı</h2>
+            </div>
+
+            <p>
+              Üretim, hizmet, ticaret, finans, inşaat, tekstil ve yatırım
+              süreçlerinin kendine özgü vergi ve denetim ihtiyaçları değerlendirilir.
+            </p>
+          </div>
+
+          <div class="values-grid">
+            <div class="value-item">
+              <i data-lucide="factory"></i>
+              <h3>Üretim</h3>
+              <p>Maliyet, stok, teşvik ve yatırım işlemlerinin mali analizi.</p>
+            </div>
+
+            <div class="value-item">
+              <i data-lucide="landmark"></i>
+              <h3>Finans</h3>
+              <p>Finansman işlemleri, nakit akışı ve vergisel risk kontrolü.</p>
+            </div>
+
+            <div class="value-item">
+              <i data-lucide="building-2"></i>
+              <h3>İnşaat</h3>
+              <p>Proje, hakediş ve yıllara yaygın işlemlerin değerlendirilmesi.</p>
+            </div>
+
+            <div class="value-item">
+              <i data-lucide="globe-2"></i>
+              <h3>Uluslararası İşlemler</h3>
+              <p>Transfer fiyatlandırması ve uluslararası vergileme desteği.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <!-- OFİSLER -->
+
+    <article class="page" data-page="ofisler">
+      <header class="page-head">
+        <div class="container page-head-grid">
+          <div>
+            <p class="eyebrow">Ofis ağı</p>
+            <h1>Üç şehirde kurumsal hizmet yapılanması</h1>
+          </div>
+
+          <p>Ofis seçerek adres, iletişim ve harita bilgilerine ulaşabilirsiniz.</p>
+        </div>
+      </header>
+
+      <section class="section reveal">
+        <div class="container office-layout">
+          <div class="office-tabs" id="officeTabs"></div>
+
+          <div class="office-panel">
+            <iframe
+              class="office-map"
+              id="officeMap"
+              title="Sarus ofis haritası"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+
+            <div class="office-info">
+              <div>
+                <p class="eyebrow">Ofis bilgisi</p>
+                <h2 id="officeTitle"></h2>
+                <p id="officeAddress"></p>
+              </div>
+
+              <div class="office-actions">
+                <a
+                  class="btn btn-outline"
+                  id="officeDirections"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i data-lucide="map-pin"></i>
+                  Yol Tarifi
+                </a>
+
+                <a class="btn btn-dark" id="officePhone">
+                  <i data-lucide="phone"></i>
+                  Ofisi Ara
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </article>
+
+    <!-- İLETİŞİM -->
+
+    <article class="page" data-page="iletisim">
+      <header class="page-head">
+        <div class="container page-head-grid">
+          <div>
+            <p class="eyebrow">İletişim</p>
+            <h1>İhtiyacınızı birlikte değerlendirelim</h1>
+          </div>
+
+          <p>
+            Form gönderildiğinde bilgilerinizle hazırlanmış e-posta taslağı açılır.
+          </p>
+        </div>
+      </header>
+
+      <section class="section reveal">
+        <div class="container contact-layout">
+          <aside class="contact-panel">
+            <div class="contact-head">
+              <h2>Adana Genel Merkez</h2>
+              <p>Hafta içi çalışma saatleri içerisinde iletişime geçebilirsiniz.</p>
+            </div>
+
+            <a class="contact-method" href="tel:+903225027855">
+              <i data-lucide="phone"></i>
+              <span>
+                <small>Telefon</small>
+                <strong>0322 502 78 55</strong>
+              </span>
+            </a>
+
+            <a class="contact-method" href="tel:+908505572787">
+              <i data-lucide="headphones"></i>
+              <span>
+                <small>Çağrı hattı</small>
+                <strong>0850 557 27 87</strong>
+              </span>
+            </a>
+
+            <a class="contact-method" href="mailto:sarusymm01@gmail.com">
+              <i data-lucide="mail"></i>
+              <span>
+                <small>E-posta</small>
+                <strong>sarusymm01@gmail.com</strong>
+              </span>
+            </a>
+
+            <a
+              class="contact-method"
+              href="https://www.google.com/maps/search/?api=1&query=Sunar+Nuri+Çomu+İş+Merkezi+Seyhan+Adana"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i data-lucide="map-pin"></i>
+              <span>
+                <small>Adres</small>
+                <strong>
+                  Çınarlı Mah. 61027 Sok. Sunar Nuri Çomu İş Merkezi,
+                  B Blok Kat: 2 No: 11, Seyhan / Adana
+                </strong>
+              </span>
+            </a>
+
+            <button class="contact-method" id="copyEmail" type="button">
+              <i data-lucide="copy"></i>
+              <span>
+                <small>Hızlı işlem</small>
+                <strong>E-posta adresini kopyala</strong>
+              </span>
+            </button>
+          </aside>
+
+          <form class="contact-form" id="contactForm">
+            <h2>Görüşme talebi</h2>
+            <p>Form herhangi bir sunucuya veri kaydetmez.</p>
+
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="contactName">Adınız ve soyadınız *</label>
+                <input class="input" id="contactName" name="name" required autocomplete="name">
+              </div>
+
+              <div class="form-field">
+                <label for="contactCompany">Şirketiniz</label>
+                <input class="input" id="contactCompany" name="company" autocomplete="organization">
+              </div>
+
+              <div class="form-field">
+                <label for="contactPhone">Telefon *</label>
+                <input
+                  class="input"
+                  id="contactPhone"
+                  name="phone"
+                  type="tel"
+                  required
+                  autocomplete="tel"
+                >
+              </div>
+
+              <div class="form-field">
+                <label for="contactEmail">E-posta *</label>
+                <input
+                  class="input"
+                  id="contactEmail"
+                  name="email"
+                  type="email"
+                  required
+                  autocomplete="email"
+                >
+              </div>
+
+              <div class="form-field">
+                <label for="contactService">İlgilendiğiniz hizmet *</label>
+                <select class="input" id="contactService" name="service" required>
+                  <option value="">Hizmet seçiniz</option>
+                  <option>Tam Tasdik</option>
+                  <option>KDV İade Tasdiki</option>
+                  <option>Vergi Danışmanlığı</option>
+                  <option>Vergi İnceleme ve Uzlaşma</option>
+                  <option>Yatırım ve Teşvik Danışmanlığı</option>
+                  <option>Transfer Fiyatlandırması</option>
+                  <option>Kurumsal Finans</option>
+                  <option>Şirket Yapılandırma</option>
+                  <option>Diğer</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="contactOffice">Tercih edilen ofis</label>
+                <select class="input" id="contactOffice" name="office">
+                  <option>Adana</option>
+                  <option>Bursa</option>
+                  <option>İstanbul</option>
+                  <option>Çevrim içi görüşme</option>
+                </select>
+              </div>
+
+              <div class="form-field full">
+                <label for="contactMessage">Kısa açıklama *</label>
+                <textarea
+                  class="input"
+                  id="contactMessage"
+                  name="message"
+                  required
+                  placeholder="Talebinizin kapsamını kısaca belirtiniz."
+                ></textarea>
+
+                <span class="form-note">
+                  Finansal şifre, parola veya hassas belge bilgisi yazmayınız.
+                </span>
+              </div>
+            </div>
+
+            <label class="consent">
+              <input type="checkbox" required>
+              <span>
+                Bilgilerimin iletişim talebimin değerlendirilmesi amacıyla
+                kullanılmasını kabul ediyorum.
+              </span>
+            </label>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">
+                <i data-lucide="mail-plus"></i>
+                E-posta Taslağı Oluştur
+              </button>
+
+              <button class="btn btn-outline" type="reset">
+                <i data-lucide="rotate-ccw"></i>
+                Formu Temizle
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-about">
+        <img
+          class="footer-logo official-logo"
+          src="https://media.licdn.com/dms/image/v2/C4E0BAQFsD0lTPt1_5g/company-logo_200_200/company-logo_200_200/0/1630613740343/sarus_yeminli_mali_musavirlik_denetim_ltd_sti_logo?e=2147483647&amp;v=beta&amp;t=5Ad3sKDLPBfa41dZU0RafwgEEV7e2SPxLCU6AwvR6Hw"
+          alt="Sarus Yeminli Mali Müşavirlik"
+          referrerpolicy="no-referrer"
+        >
+
+        <p>
+          Yeminli mali müşavirlik, tasdik, vergi, yatırım ve finansal danışmanlık hizmetleri.
+        </p>
+      </div>
+
+      <div class="footer-column">
+        <h2>Kurumsal</h2>
+
+        <ul class="footer-links">
+          <li><a href="#/kurumsal">Hakkımızda</a></li>
+          <li><a href="#/kadromuz">YMM Kadromuz</a></li>
+          <li><a href="#/ofisler">Ofisler</a></li>
+          <li><a href="#/iletisim">İletişim</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h2>Hizmetler</h2>
+
+        <ul class="footer-links">
+          <li><a href="#/hizmetler/tam-tasdik">Tam Tasdik</a></li>
+          <li><a href="#/hizmetler/kdv-iade">KDV İadesi</a></li>
+          <li><a href="#/hizmetler/vergi-danismanligi">Vergi Danışmanlığı</a></li>
+          <li><a href="#/hizmetler/yatirim-tesvik">Yatırım ve Teşvik</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h2>İletişim</h2>
+
+        <div class="footer-contact">
+          <a href="tel:+903225027855">
+            <i data-lucide="phone"></i>
+            0322 502 78 55
+          </a>
+
+          <a href="mailto:sarusymm01@gmail.com">
+            <i data-lucide="mail"></i>
+            sarusymm01@gmail.com
+          </a>
+
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=Sunar+Nuri+Çomu+İş+Merkezi+Seyhan+Adana"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i data-lucide="map-pin"></i>
+            Sunar Nuri Çomu İş Merkezi, Seyhan / Adana
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>
+        © <span id="year"></span> Sarus Yeminli Mali Müşavirlik Denetim Ltd. Şti.
+      </span>
+
+      <div class="footer-bottom-links">
+        <a
+          href="https://www.linkedin.com/company/sarusymm"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LinkedIn
+        </a>
+
+        <a
+          href="https://www.adanaymmo.org.tr/uyelerimiz/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Adana YMMO
+        </a>
+
+        <button
+          type="button"
+          data-print
+          style="padding:0;color:inherit;background:none;border:0"
+        >
+          Yazdır
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <dialog
+    class="profile-dialog"
+    id="profileDialog"
+    aria-labelledby="dialogPersonName"
+  >
+    <button
+      class="icon-btn dialog-close"
+      id="profileClose"
+      type="button"
+      aria-label="Profili kapat"
+      title="Kapat"
+    >
+      <i data-lucide="x"></i>
+    </button>
+
+    <div class="profile-dialog-body">
+      <div class="dialog-person-image" id="dialogPersonImage"></div>
+
+      <div class="dialog-person-content">
+        <p class="eyebrow">Yeminli mali müşavir</p>
+        <h2 id="dialogPersonName"></h2>
+        <p class="dialog-role" id="dialogPersonRole"></p>
+        <p class="dialog-summary" id="dialogPersonSummary"></p>
+
+        <a
+          class="btn btn-glass"
+          id="dialogPersonSource"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i data-lucide="external-link"></i>
+          Mesleki Kaynağı Görüntüle
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <button
+    class="icon-btn back-top"
+    id="backTop"
+    type="button"
+    aria-label="Sayfanın başına dön"
+    title="Yukarı dön"
+  >
+    <i data-lucide="arrow-up"></i>
+  </button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const LOGO_URL =
+      "https://media.licdn.com/dms/image/v2/C4E0BAQFsD0lTPt1_5g/company-logo_200_200/company-logo_200_200/0/1630613740343/sarus_yeminli_mali_musavirlik_denetim_ltd_sti_logo?e=2147483647&v=beta&t=5Ad3sKDLPBfa41dZU0RafwgEEV7e2SPxLCU6AwvR6Hw";
+
+    const profiles = {
+      mehmet: {
+        name: "Mehmet ÖKKE",
+        title: "Yeminli Mali Müşavir · Kurucu Ortak",
+        experience: "Müstafi Vergi Müfettişi",
+        image: "",
+        initials: "MÖ",
+        source: "https://okke.av.tr/vergi-ve-finansman/",
+        summary:
+          "Selçuk Üniversitesi Kamu Yönetimi mezunudur. 2010 yılında Vergi Denetim Kurulu Başkanlığı bünyesinde Vergi Müfettişi olarak göreve başlamış, 2020 yılında kamu görevinden ayrılmıştır. Vergi denetimi, tasdik, uluslararası vergileme ve finans sektörlerinde deneyim sahibidir."
+      },
+
+      dogan: {
+        name: "Doğan CEYLAN",
+        title: "Yeminli Mali Müşavir",
+        experience: "Müstafi Vergi Müfettişi",
+        image: "",
+        initials: "DC",
+        source: "https://www.adanaymmo.org.tr/uyelerimiz/",
+        summary:
+          "İstanbul Üniversitesi İktisat Fakültesi mezunudur. 2010 yılında Vergi Denetim Kurulu Başkanlığı bünyesinde Vergi Müfettişi olarak göreve başlamış, 2020 yılında kamu görevinden ayrılmıştır. Vergi mevzuatı, üretim, hizmet ve ticaret işletmelerinin denetiminde deneyim sahibidir."
+      },
+
+      fatih: {
+        name: "Fatih Serdar VARAN",
+        title: "Yeminli Mali Müşavir",
+        experience: "Vergi Denetimi Deneyimi",
+        image: "",
+        initials: "FS",
+        source: "https://tr.linkedin.com/in/fatih-serdar-varan-115718174",
+        summary:
+          "Vergi Denetim Kurulu Başkanlığı geçmişine sahip Yeminli Mali Müşavirdir. Sarus YMM bünyesinde vergi, denetim ve tasdik çalışmalarında görev almaktadır."
+      }
+    };
+
+    const services = {
+      "tam-tasdik": {
+        title: "Tam Tasdik Hizmeti",
+        formName: "Tam Tasdik",
+        icon: "file-check-2",
+        summary:
+          "Kurumlar vergisi beyannamesi ve mali tabloların yıl boyunca planlı biçimde incelenmesi, risklerin tespit edilmesi ve YMM tasdik raporunun hazırlanması.",
+        scope: [
+          "Dönemsel mali kayıt ve beyanname kontrolleri",
+          "Gelir ve gider hesaplarının mevzuat yönünden incelenmesi",
+          "Vergi karşılıkları ve mali kâr hesaplamalarının kontrolü",
+          "İstisna, indirim ve teşvik uygulamalarının değerlendirilmesi",
+          "Dönem sonu işlemlerinin kontrolü"
+        ],
+        outputs: [
+          "Dönemsel değerlendirme notları",
+          "Eksik belge ve düzeltme listeleri",
+          "Vergisel risk değerlendirmesi",
+          "Yıllık tam tasdik raporu",
+          "Yönetim bilgilendirme toplantısı"
+        ]
+      },
+
+      "kdv-iade": {
+        title: "KDV İade Tasdiki",
+        formName: "KDV İade Tasdiki",
+        icon: "receipt-text",
+        summary:
+          "İade hakkı doğuran işlemlere ilişkin yüklenilen KDV hesaplarının incelenmesi, gerekli listelerin kontrol edilmesi ve tasdik raporunun hazırlanması.",
+        scope: [
+          "İade türünün ve yasal dayanağın belirlenmesi",
+          "Yüklenilen ve indirilecek KDV listelerinin kontrolü",
+          "Satış faturaları ve gümrük belgelerinin incelenmesi",
+          "Karşıt inceleme süreçlerinin yönetimi",
+          "Eksiklik yazılarının değerlendirilmesi"
+        ],
+        outputs: [
+          "KDV iade kontrol dosyası",
+          "Eksiklik ve düzeltme listesi",
+          "Karşıt inceleme tutanakları",
+          "KDV iade tasdik raporu",
+          "Vergi dairesi süreç takibi"
+        ]
+      },
+
+      "vergi-danismanligi": {
+        title: "Vergi Danışmanlığı",
+        formName: "Vergi Danışmanlığı",
+        icon: "scale",
+        summary:
+          "Günlük işlemlerden stratejik kararlara kadar vergisel sonuçların önceden değerlendirilmesi ve mevzuata uygun uygulama modelinin oluşturulması.",
+        scope: [
+          "Kurumlar vergisi, KDV ve stopaj danışmanlığı",
+          "Sözleşmelerin vergisel açıdan incelenmesi",
+          "Vergi istisna ve indirimlerinin değerlendirilmesi",
+          "Özelge, tebliğ ve yargı kararlarının analizi",
+          "Mevzuat değişikliklerinin şirkete etkisinin belirlenmesi"
+        ],
+        outputs: [
+          "Yazılı teknik görüş",
+          "İşlem bazlı vergi analizleri",
+          "Mevzuat bilgilendirmeleri",
+          "Risk ve aksiyon listesi",
+          "Yönetim sunumu"
+        ]
+      },
+
+      "vergi-inceleme": {
+        title: "Vergi İnceleme ve Uzlaşma",
+        formName: "Vergi İnceleme ve Uzlaşma",
+        icon: "search-check",
+        summary:
+          "Vergi incelemesi, izaha davet, tarhiyat ve uzlaşma süreçlerinde mali kayıtların teknik açıdan değerlendirilmesi.",
+        scope: [
+          "İnceleme konusu ve döneminin analizi",
+          "Bilgi ve belgelerin hazırlanması",
+          "Tutanak ve rapor taslaklarının değerlendirilmesi",
+          "Vergi ve ceza hesaplamalarının kontrolü",
+          "Uzlaşma hazırlığı ve teknik destek"
+        ],
+        outputs: [
+          "İnceleme hazırlık dosyası",
+          "Teknik değerlendirme raporu",
+          "Risk ve olasılık analizi",
+          "Uzlaşma hesaplamaları",
+          "Süreç takip çizelgesi"
+        ]
+      },
+
+      "yatirim-tesvik": {
+        title: "Yatırım ve Teşvik Danışmanlığı",
+        formName: "Yatırım ve Teşvik Danışmanlığı",
+        icon: "chart-no-axes-combined",
+        summary:
+          "Planlanan yatırımların teşvik sistemi, vergisel avantajlar, finansman ihtiyacı ve nakit etkileri açısından değerlendirilmesi.",
+        scope: [
+          "Yatırımın teşvik unsurları açısından incelenmesi",
+          "Yatırım teşvik belgesi hazırlık desteği",
+          "KDV istisnası ve vergi indirimi hesaplamaları",
+          "Yatırım harcamalarının uygunluk kontrolü",
+          "Tamamlama vizesi hazırlığı"
+        ],
+        outputs: [
+          "Teşvik uygunluk ön analizi",
+          "Yatırım mali etki tablosu",
+          "Başvuru bilgi ve belge listesi",
+          "Teşvik kullanım takip tablosu",
+          "Tamamlama kontrol dosyası"
+        ]
+      },
+
+      "transfer-fiyatlandirma": {
+        title: "Transfer Fiyatlandırması",
+        formName: "Transfer Fiyatlandırması",
+        icon: "network",
+        summary:
+          "İlişkili taraf işlemlerinin emsallere uygunluk ilkesi açısından analiz edilmesi ve gerekli raporlamanın hazırlanması.",
+        scope: [
+          "İlişkili kişi ve işlem envanteri",
+          "Fonksiyon ve risk analizi",
+          "Uygun yöntemin seçilmesi",
+          "Emsal araştırması",
+          "Raporlama yükümlülüklerinin kontrolü"
+        ],
+        outputs: [
+          "İlişkili işlem matrisi",
+          "Fonksiyon ve risk analizi",
+          "Emsal araştırma çalışması",
+          "Transfer fiyatlandırması raporu",
+          "Uygulama önerileri"
+        ]
+      },
+
+      "kurumsal-finans": {
+        title: "Kurumsal Finans Danışmanlığı",
+        formName: "Kurumsal Finans",
+        icon: "chart-spline",
+        summary:
+          "Yönetimin karar alma sürecini desteklemek amacıyla bütçe, nakit akışı ve finansal performans analizlerinin hazırlanması.",
+        scope: [
+          "Bütçe ve gerçekleşen karşılaştırmaları",
+          "Nakit akış projeksiyonu",
+          "Karlılık ve maliyet analizleri",
+          "Finansal oran değerlendirmesi",
+          "Yatırım geri dönüş hesaplamaları"
+        ],
+        outputs: [
+          "Yönetim raporlama paketi",
+          "Nakit akış tablosu",
+          "Bütçe ve sapma analizi",
+          "Finansal gösterge paneli",
+          "Karar destek raporu"
+        ]
+      },
+
+      "sirket-yapilandirma": {
+        title: "Şirket Yapılandırma Danışmanlığı",
+        formName: "Şirket Yapılandırma",
+        icon: "building-2",
+        summary:
+          "Birleşme, bölünme, tür değişikliği, sermaye artırımı ve ortaklık yapısı değişikliklerinin mali sonuçlarıyla planlanması.",
+        scope: [
+          "Alternatif yapıların mali analizi",
+          "Birleşme, bölünme ve tür değişikliği",
+          "Sermaye işlemlerinin incelenmesi",
+          "Devir ve ortaklık işlemleri",
+          "Uygulama takvimi hazırlanması"
+        ],
+        outputs: [
+          "Alternatif yapı karşılaştırması",
+          "Vergisel etki analizi",
+          "İşlem adımları ve takvim",
+          "Gerekli rapor çalışmaları",
+          "Uygulama kontrol listesi"
+        ]
+      }
+    };
+
+    const offices = {
+      adana: {
+        title: "Adana Genel Merkez",
+        subtitle: "Seyhan / Adana",
+        address:
+          "Çınarlı Mahallesi 61027 Sokak, Sunar Nuri Çomu İş Merkezi B Blok, Kat: 2 No: 11, Seyhan / Adana",
+        query:
+          "Sarus Yeminli Mali Müşavirlik Sunar Nuri Çomu İş Merkezi Seyhan Adana",
+        phone: "+903225027855"
+      },
+
+      bursa: {
+        title: "Bursa Şubesi",
+        subtitle: "Osmangazi / Bursa",
+        address:
+          "Aktarhüssam Mahallesi Hacı Yakup Sokak, İlker İş Hanı No: 32 İç Kapı No: 406, Osmangazi / Bursa",
+        query:
+          "İlker İş Hanı Aktarhüssam Mahallesi Osmangazi Bursa",
+        phone: "+908505572787"
+      },
+
+      istanbul: {
+        title: "İstanbul Şubesi",
+        subtitle: "Kartal / İstanbul",
+        address:
+          "Kartal / İstanbul. Güncel açık adres ve görüşme planlaması için genel merkezle iletişime geçiniz.",
+        query: "Kartal İstanbul",
+        phone: "+908505572787"
+      }
+    };
+
+    const pages = document.querySelectorAll(".page");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const menuToggle = document.getElementById("menuToggle");
+    const mainNav = document.getElementById("mainNav");
+    const toast = document.getElementById("toast");
+
+    let selectedService = "tam-tasdik";
+    let selectedOffice = "adana";
+
+    function icons() {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("visible");
+
+      clearTimeout(showToast.timer);
+
+      showToast.timer = setTimeout(() => {
+        toast.classList.remove("visible");
+      }, 2800);
+    }
+
+    function closeMenu() {
+      mainNav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Menüyü aç");
+      menuToggle.innerHTML = '<i data-lucide="menu"></i>';
+      document.body.classList.remove("locked");
+      icons();
+    }
+
+    function renderTeams() {
+      const markup = Object.entries(profiles)
+        .map(([id, profile]) => {
+          const media = profile.image
+            ? `
+              <div class="person-media">
+                <img
+                  src="${profile.image}"
+                  alt="${profile.name}"
+                  loading="lazy"
+                  referrerpolicy="no-referrer"
+                  onerror="this.parentElement.classList.add('has-error');this.remove();"
+                >
+                <span class="person-initials" aria-hidden="true">${profile.initials}</span>
+              </div>
+            `
+            : `
+              <div class="person-media no-photo">
+                <span class="person-initials" aria-hidden="true">${profile.initials}</span>
+              </div>
+            `;
+
+          return `
+            <article class="person-card">
+              ${media}
+
+              <div class="person-glass">
+                <div>
+                  <h3>${profile.name}</h3>
+                  <p>${profile.title}</p>
+                  <small>${profile.experience}</small>
+                </div>
+
+                <button
+                  class="profile-open"
+                  type="button"
+                  data-profile="${id}"
+                  aria-label="${profile.name} profilini incele"
+                  title="Profili incele"
+                >
+                  <i data-lucide="arrow-up-right"></i>
+                </button>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+
+      document.querySelectorAll("[data-team-grid]").forEach((grid) => {
+        grid.innerHTML = markup;
+      });
+
+      document.querySelectorAll("[data-profile]").forEach((button) => {
+        button.addEventListener("click", () => {
+          openProfile(button.dataset.profile);
+        });
+      });
+    }
+
+    function openProfile(profileId) {
+      const profile = profiles[profileId];
+
+      if (!profile) {
+        return;
+      }
+
+      document.getElementById("dialogPersonName").textContent = profile.name;
+      document.getElementById("dialogPersonRole").textContent =
+        `${profile.title} · ${profile.experience}`;
+
+      document.getElementById("dialogPersonSummary").textContent =
+        profile.summary;
+
+      document.getElementById("dialogPersonSource").href = profile.source;
+
+      const visual = document.getElementById("dialogPersonImage");
+
+      if (profile.image) {
+        visual.innerHTML = `
+          <img
+            src="${profile.image}"
+            alt="${profile.name}"
+            referrerpolicy="no-referrer"
+          >
+        `;
+
+        visual.querySelector("img").addEventListener("error", () => {
+          visual.innerHTML =
+            `<div class="dialog-monogram">${profile.initials}</div>`;
+        });
+      } else {
+        visual.innerHTML =
+          `<div class="dialog-monogram">${profile.initials}</div>`;
+      }
+
+      document.getElementById("profileDialog").showModal();
+      document.body.classList.add("locked");
+      icons();
+    }
+
+    function renderServiceTabs() {
+      document.getElementById("serviceTabs").innerHTML =
+        Object.entries(services)
+          .map(([id, service]) => `
+            <button
+              class="service-tab"
+              type="button"
+              data-service="${id}"
+            >
+              ${service.title.replace(" Hizmeti", "").replace(" Danışmanlığı", "")}
+              <i data-lucide="arrow-right"></i>
+            </button>
+          `)
+          .join("");
+
+      document.querySelectorAll("[data-service]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectService(button.dataset.service, true);
+        });
+      });
+    }
+
+    function selectService(serviceId, updateHash = false) {
+      const service = services[serviceId];
+
+      if (!service) {
+        return;
+      }
+
+      selectedService = serviceId;
+
+      document.querySelectorAll("[data-service]").forEach((button) => {
+        button.classList.toggle(
+          "active",
+          button.dataset.service === serviceId
+        );
+      });
+
+      document.getElementById("serviceTitle").textContent = service.title;
+      document.getElementById("serviceSummary").textContent = service.summary;
+
+      document.getElementById("serviceScope").innerHTML =
+        service.scope.map((item) => `<li>${item}</li>`).join("");
+
+      document.getElementById("serviceOutputs").innerHTML =
+        service.outputs.map((item) => `<li>${item}</li>`).join("");
+
+      const icon = document.getElementById("serviceIcon");
+      icon.setAttribute("data-lucide", service.icon);
+
+      if (updateHash) {
+        location.hash = `#/hizmetler/${serviceId}`;
+      }
+
+      icons();
+    }
+
+    function renderOfficeTabs() {
+      document.getElementById("officeTabs").innerHTML =
+        Object.entries(offices)
+          .map(([id, office]) => `
+            <button class="office-tab" type="button" data-office="${id}">
+              <span>
+                <strong>${office.title}</strong>
+                <small>${office.subtitle}</small>
+              </span>
+              <i data-lucide="arrow-right"></i>
+            </button>
+          `)
+          .join("");
+
+      document.querySelectorAll("[data-office]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectOffice(button.dataset.office, true);
+        });
+      });
+    }
+
+    function selectOffice(officeId, updateHash = false) {
+      const office = offices[officeId];
+
+      if (!office) {
+        return;
+      }
+
+      selectedOffice = officeId;
+
+      document.querySelectorAll("[data-office]").forEach((button) => {
+        button.classList.toggle(
+          "active",
+          button.dataset.office === officeId
+        );
+      });
+
+      document.getElementById("officeTitle").textContent = office.title;
+      document.getElementById("officeAddress").textContent = office.address;
+
+      document.getElementById("officeMap").src =
+        `https://www.google.com/maps?q=${encodeURIComponent(office.query)}&output=embed`;
+
+      document.getElementById("officeDirections").href =
+        `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.query)}`;
+
+      document.getElementById("officePhone").href = `tel:${office.phone}`;
+
+      if (updateHash) {
+        location.hash = `#/ofisler/${officeId}`;
+      }
+
+      icons();
+    }
+
+    function route() {
+      const routeText = location.hash.replace(/^#\//, "") || "anasayfa";
+      const [requestedPage, detail] = routeText.split("/");
+
+      const validPage = document.querySelector(
+        `[data-page="${requestedPage}"]`
+      );
+
+      const pageName = validPage ? requestedPage : "anasayfa";
+
+      pages.forEach((page) => {
+        page.classList.toggle("active", page.dataset.page === pageName);
+      });
+
+      navLinks.forEach((link) => {
+        const linkPage = link
+          .getAttribute("href")
+          .replace("#/", "")
+          .split("/")[0];
+
+        link.classList.toggle("active", linkPage === pageName);
+      });
+
+      if (pageName === "hizmetler") {
+        selectService(services[detail] ? detail : selectedService);
+      }
+
+      if (pageName === "ofisler") {
+        selectOffice(offices[detail] ? detail : selectedOffice);
+      }
+
+      document.title =
+        pageName === "anasayfa"
+          ? "Sarus Yeminli Mali Müşavirlik"
+          : `${document.querySelector(`[data-page="${pageName}"] h1`)?.textContent || "Sarus"} | Sarus YMM`;
+
+      closeMenu();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      requestAnimationFrame(() => {
+        document
+          .querySelectorAll(".page.active .reveal")
+          .forEach((element) => revealObserver?.observe(element));
+      });
+
+      icons();
+    }
+
+    menuToggle.addEventListener("click", () => {
+      const open = !mainNav.classList.contains("open");
+
+      mainNav.classList.toggle("open", open);
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute(
+        "aria-label",
+        open ? "Menüyü kapat" : "Menüyü aç"
+      );
+
+      menuToggle.innerHTML = open
+        ? '<i data-lucide="x"></i>'
+        : '<i data-lucide="menu"></i>';
+
+      document.body.classList.toggle("locked", open);
+      icons();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    });
+
+    document.getElementById("serviceConsult").addEventListener("click", () => {
+      sessionStorage.setItem(
+        "sarusService",
+        services[selectedService].formName
+      );
+
+      location.hash = "#/iletisim";
+
+      setTimeout(() => {
+        const select = document.getElementById("contactService");
+        select.value = services[selectedService].formName;
+      }, 100);
+    });
+
+    document.querySelectorAll(".faq-question").forEach((button) => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        const answer = button.nextElementSibling;
+
+        button.setAttribute("aria-expanded", String(!expanded));
+        answer.classList.toggle("open", !expanded);
+      });
+    });
+
+    document.getElementById("profileClose").addEventListener("click", () => {
+      document.getElementById("profileDialog").close();
+    });
+
+    document.getElementById("profileDialog").addEventListener("click", (event) => {
+      if (event.target === event.currentTarget) {
+        event.currentTarget.close();
+      }
+    });
+
+    document.getElementById("profileDialog").addEventListener("close", () => {
+      document.body.classList.remove("locked");
+    });
+
+    document.getElementById("copyEmail").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText("sarusymm01@gmail.com");
+        showToast("E-posta adresi kopyalandı.");
+      } catch {
+        showToast("E-posta: sarusymm01@gmail.com");
+      }
+    });
+
+    document.getElementById("contactForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+
+      if (!form.reportValidity()) {
+        return;
+      }
+
+      const data = new FormData(form);
+
+      const subject =
+        `Sarus YMM Görüşme Talebi - ${data.get("service")}`;
+
+      const body = [
+        "SARUS YMM GÖRÜŞME TALEBİ",
+        "",
+        `Ad Soyad: ${data.get("name")}`,
+        `Şirket: ${data.get("company") || "-"}`,
+        `Telefon: ${data.get("phone")}`,
+        `E-posta: ${data.get("email")}`,
+        `Hizmet: ${data.get("service")}`,
+        `Tercih Edilen Ofis: ${data.get("office")}`,
+        "",
+        "Açıklama:",
+        data.get("message")
+      ].join("\n");
+
+      showToast("E-posta uygulamanız açılıyor.");
+
+      location.href =
+        `mailto:sarusymm01@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    });
+
+    document.querySelectorAll("[data-print]").forEach((button) => {
+      button.addEventListener("click", () => window.print());
+    });
+
+    document.querySelectorAll(".official-logo").forEach((image) => {
+      image.addEventListener("error", () => {
+        image.style.display = "none";
+
+        const fallback =
+          image.parentElement?.querySelector(".brand-logo-fallback");
+
+        if (fallback) {
+          fallback.style.display = "block";
+        }
+      });
+    });
+
+    const backTop = document.getElementById("backTop");
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        backTop.classList.toggle("visible", window.scrollY > 600);
+      },
+      { passive: true }
+    );
+
+    backTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const hero = document.getElementById("hero");
+
+    if (
+      hero &&
+      matchMedia("(pointer: fine)").matches &&
+      !matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      hero.addEventListener("pointermove", (event) => {
+        const rect = hero.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width;
+        const y = (event.clientY - rect.top) / rect.height;
+
+        hero.style.setProperty("--hero-x", `${50 + (x - 0.5) * 5}%`);
+        hero.style.setProperty("--hero-y", `${43 + (y - 0.5) * 4}%`);
+      });
+
+      hero.addEventListener("pointerleave", () => {
+        hero.style.setProperty("--hero-x", "50%");
+        hero.style.setProperty("--hero-y", "43%");
+      });
+    }
+
+    let revealObserver = null;
+
+    if (
+      "IntersectionObserver" in window &&
+      !matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("revealed");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -40px"
+        }
+      );
+
+      document.querySelectorAll(".reveal").forEach((element) => {
+        revealObserver.observe(element);
+      });
+    } else {
+      document.querySelectorAll(".reveal").forEach((element) => {
+        element.classList.add("revealed");
+      });
+    }
+
+    window.addEventListener("hashchange", route);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+      renderTeams();
+      renderServiceTabs();
+      renderOfficeTabs();
+      selectService("tam-tasdik");
+      selectOffice("adana");
+
+      const storedService = sessionStorage.getItem("sarusService");
+
+      if (storedService) {
+        document.getElementById("contactService").value = storedService;
+        sessionStorage.removeItem("sarusService");
+      }
+
+      route();
+      icons();
+    });
+  </script>
+</body>
+</html>
